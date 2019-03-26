@@ -1,0 +1,2 @@
+# Pokemon-Abstract
+Abstract Class
