@@ -7,8 +7,8 @@ abstract class Pokemon
     protected $type; //the Type of the pokemon
     protected $health; //the amount of health the pokemon has
     protected $hitPoints; //the amount of hitPoints the pokemon has
-    protected $resistance; //the Strength of the pokemon
-    protected $weakness; //the Weakness of the pokemon
+    protected $resistance = []; //the Strength of the pokemon
+    protected $weakness = []; //the Weakness of the pokemon
     protected $attacks = []; //the Attacks of the pokemon
     protected $picture = []; //the pictures or gifs of the pokemon
 
@@ -53,63 +53,126 @@ abstract class Pokemon
         return $result;
     }
 
-    public function statDisplayer()
+    public function statDisplay()
     {
-        echo $this->__get('name') . "'s stats.";
-        echo "<br>";
-        echo "Type " . $this->__get('type')->name . ". ";
-        echo "Health " . $this->__get('health') . ". ";
-        echo "Resistance " . $this->__get('resistance')->name . ". ";
-        echo "Weakness " . $this->__get('weakness')->name . ". ";
-        echo "Attack 1: " . $this->__get('attacks')[0]->name . " " . $this->__get('attacks')[0]->damage . ". ";
-        echo "Attack 2: " . $this->__get('attacks')[1]->name . " " . $this->__get('attacks')[1]->damage . ". ";
+        echo $this->__get('name') . "<br>";
+        echo "Type : " . $this->__get('type') . ". " . "<br>";
+        echo "Health : " . $this->__get('health') . "/" . $this->__get('hitPoints') . "." . "<br>";
+        echo "Resistance : " . $this->__get('resistance')->type . ". " . "<br>";
+        echo "Weakness : " . $this->__get('weakness')->type . ". " . "<br>";
+        echo "Attack 1 : " . $this->__get('attacks')[0]->name . " " . $this->__get('attacks')[0]->damage . " dmg. " . "<br>";
+        echo "Attack 2 : " . $this->__get('attacks')[1]->name . " " . $this->__get('attacks')[1]->damage . " dmg. " . "<br>";
+        echo "<br><br>";
     }
 
-//    public function fightDisplayer()
-//    {
-//        echo "<br>";
-//
-//        //displays an image of the pokemon
-//        echo "<img width=30% src=" . $poke1->picture[0]->location . " alt=" . "A photo the" . $poke0->name . ">";
-//
-//        echo "<br>";
-//
-//        //starts the attack function and sends the needed information to the function
-//        $result1 = $poke1->attack($poke1->attacks[1], $poke1, $poke0);
-//
-//        //displays fight two on screen
-//        echo $poke1->name . " attacks " . $poke0->name . " with " . $poke1->attacks[1]->name . " and deals " . $result1[0] . " damage.";
-//        echo "<br>";
-//        echo $poke0->name . " has " . $result1[1] . " hitpoints of the " . $poke1->health . " left.";
-//    }
+    public function battleCalc($attack, $defender) {
+
+    }
+
+    public function battleDisplay($attack, $defender)
+    {
+        echo "<br>";
+
+        //displays an image of the pokemon
+//        echo "<img width=30% src=" . $this->picture[0]->location . " alt=" . "A picture of" . $this->name . ">";
+
+        echo "<br>";
+
+        //displays fight two on screen
+        echo $this->name . " attacks " . $defender->name . " with " . $attack . " and deals " . $result['damage'] . " damage.";
+        echo "<br>";
+        echo $defender->name . " has " . $result['hitPoints'] . " hitPoints of the " . $defender->health . " left.";
+    }
 }
 
 class Pikachu extends Pokemon
 {
-    public function __construct($_name, $_type, $_health, $_hitPoints, $_resistance, $_weakness, $_attacks, $_picture)
+    public function __construct($_name)
     {
         $this->name = $_name;
-        $this->type = $_type;
-        $this->health = $_health;
-        $this->hitPoints = $_hitPoints;
-        $this->resistance = $_resistance;
-        $this->weakness = $_weakness;
-        $this->attacks = $_attacks;
-        $this->picture = $_picture;
+        $this->type = 'lightning';
+        $this->health = '60';
+        $this->hitPoints = '60';
+        $this->resistance = new Resistance('fighting', 20);
+        $this->weakness = new Weakness('fire', 1.5);
+        $this->attacks =
+            [
+                new Attack('Electric Ring', 50),
+                new Attack('Pika Punch', 20)
+            ];
+        $this->picture =
+            [
+                new Picture('front', 'img/pikachu.gif'),
+                new Picture('back', 'img/pikachu-back.gif')
+            ];
     }
 }
 
 class Charmeleon extends Pokemon
 {
-    public function __construct($_name, $_type, $_health, $_hitPoints, $_resistance, $_weakness, $_attacks, $_picture)
+    public function __construct($_name)
     {
         $this->name = $_name;
-        $this->type = $_type;
-        $this->health = $_health;
-        $this->hitPoints = $_hitPoints;
-        $this->resistance = $_resistance;
-        $this->weakness = $_weakness;
-        $this->attacks = $_attacks;
-        $this->picture = $_picture;
+        $this->type = 'fire';
+        $this->health = '60';
+        $this->hitPoints = '60';
+        $this->resistance = new Resistance('lightning', 10);
+        $this->weakness = new Weakness('water', 2);
+        $this->attacks =
+            [
+                new Attack('Head Butt', 10),
+                new Attack('Flare', 30)
+            ];
+        $this->picture =
+            [
+                new Picture('front', 'img/charmeleon.gif'),
+                new Picture('back', 'img/charmeleon-back.gif')
+            ];
+    }
+}
+
+class Squirtle extends Pokemon
+{
+    public function __construct($_name)
+    {
+        $this->name = $_name;
+        $this->type = 'water';
+        $this->health = '60';
+        $this->hitPoints = '60';
+        $this->resistance = new Resistance('fire', 15);
+        $this->weakness = new Weakness('lightning', 1.25);
+        $this->attacks =
+            [
+                new Attack('Water blast', 35),
+                new Attack('Punch', 20)
+            ];
+        $this->picture =
+            [
+                new Picture('front', 'img/squirtle.gif'),
+                new Picture('back', 'img/squirtle-back.gif')
+            ];
+    }
+}
+
+class Mankey extends Pokemon
+{
+    public function __construct($_name)
+    {
+        $this->name = $_name;
+        $this->type = 'fighting';
+        $this->health = '60';
+        $this->hitPoints = '60';
+        $this->resistance = new Resistance('water', 10);
+        $this->weakness = new Weakness('lightning', 50);
+        $this->attacks =
+            [
+                new Attack('Water blast', 35),
+                new Attack('Punch', 20)
+            ];
+        $this->picture =
+            [
+                new Picture('Sucker punch', 'img/mankey.gif'),
+                new Picture('Uppercut', 'img/mankey-back.gif')
+            ];
     }
 }

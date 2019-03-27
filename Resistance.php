@@ -3,13 +3,13 @@
 //template for making a resistance
 class Resistance
 {
-    public $name; //the name of the resistance
+    public $type; //the name of the resistance
     public $blockPoints; //the amount of blocked damage points
 
 
-    public function __construct($_name, $_blockPoints)
+    public function __construct($_type, $_blockPoints)
     {
-        $this->name = $_name;
+        $this->type = $_type;
         $this->blockPoints = $_blockPoints;
     }
 }
