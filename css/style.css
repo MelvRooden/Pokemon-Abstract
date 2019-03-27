@@ -1,0 +1,10 @@
+*
+{
+    color: white;
+}
+
+body
+{
+    background-image: url("grfx/backdrop.png");
+    background-size: cover;
+}
