@@ -53,24 +53,27 @@ echo "<br>";
 
 echo "<div class=\"col-md-offset-7\">";
     echo "<div class=\"col-md-offset-0\">";
-        $poke0->statDisplay();
-        $poke1->statDisplay();
-        $poke2->statDisplay();
-        $poke3->statDisplay();
+//        $poke0->statDisplay();
+//        $poke1->statDisplay();
+//        $poke2->statDisplay();
+//        $poke3->statDisplay();
     echo "</div>";
 echo "</div>";
 
 echo "<div class=\"col-md-offset-7\">";
     echo "<div class=\"col-md-offset-0\">";
 
-        $challenger0 = mt_rand(0, sizeof($this->pokeBag));
-    $challenger1 = mt_rand(0, sizeof($this->pokeBag));
-    if ($challenger0 === $challenger1) {
-            $challenger1 = mt_rand(0, sizeof($this->pokeBag));
-        }
-//        echo $pokeBag[$challenger0][$this->__get('name')];
-        var_dump($challenger0);
-        var_dump($challenger1);
+        $randPokemon0 = mt_rand(0, sizeof($pokeBag) - 1);
+        do {
+            $randPokemon1 = mt_rand(0, sizeof($pokeBag) - 1);
+        } while ($randPokemon0 === $randPokemon1);
+
+        $randAttack0 = mt_rand(0, sizeof($pokeBag[$randPokemon0]->__get('attacks')) - 1);
+        $randAttack1 = mt_rand(0, sizeof($pokeBag[$randPokemon1]->__get('attacks')) - 1);
+
+        $pokeBag[$randPokemon0]->attack($randAttack0, $pokeBag[$randPokemon1]);
+        $pokeBag[$randPokemon1]->attack($randAttack1, $pokeBag[$randPokemon0]);
+
 
     echo "</div>";
 echo "</div>";

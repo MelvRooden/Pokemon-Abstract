@@ -17,42 +17,6 @@ abstract class Pokemon
         return $this->$request;
     }
 
-    //calculates the fight between 2 pokemon
-    public function attack($attack, $defender)
-    {
-        //compares the pokemon and calculates the fight
-        //compares the type of the attacker with the resistance of the defender and makes a calculation
-        if ($this->type === $defender->weakness->name) {
-            echo "The attack was very effective!";
-            echo "<br>";
-            $attack_damage = $attack->damage * $defender->weakness->multiplier;
-
-            //compares the attacker type with the defender weakness and makes a calculation
-        } else if ($this->type === $defender->resistance->name) {
-            echo "The attack was very ineffective!";
-            echo "<br>";
-            $attack_damage = $attack->damage - $defender->resistance->blockPoints;
-
-            //if none of the above are the comparable this calculation will be made
-        } else {
-            echo "The attack hit them.";
-            echo "<br>";
-            $attack_damage = $attack->damage;
-        }
-
-        //takes the amount of damage off the attacked pokemon's hitPoints
-        $attack_result = $defender->hitPoints - $attack_damage;
-
-        //puts all the results into $result
-        $result = [$attack_damage, $attack_result];
-
-        //saves the result in the pokemon
-        $defender->hitPoints = $attack_result;
-
-        //returns the $result to the index.php
-        return $result;
-    }
-
     public function statDisplay()
     {
         echo $this->__get('name') . "<br>";
@@ -65,11 +29,34 @@ abstract class Pokemon
         echo "<br><br>";
     }
 
-    public function battleCalc($attack, $defender) {
+    //compares the pokemon and calculates the fight
+    public function attack($attackNumber, $defender) {
+        //compares the type of the attacker with the resistance of the defender and makes a calculation
+        if ($this->type->type === $defender->weakness->type) {
+            $effect = "The attack was very effective!";
+            echo "<br>";
+            $attackDamage = $this->attacks[$attackNumber]->damage * $defender->weakness->multiplier;
 
+            //compares the attacker type with the defender weakness and makes a calculation
+        } else if ($this->type->type === $defender->resistance->type) {
+            $effect = "The attack was very ineffective!";
+            echo "<br>";
+            $attackDamage = $this->attacks[$attackNumber]->damage - $defender->resistance->blockPoints;
+
+            //if none of the above are the comparable this calculation will be made
+        } else {
+            $effect = "The attack hit them.";
+            echo "<br>";
+            $attackDamage = $this->attacks[$attackNumber]->damage;
+        }
+
+        //takes the amount of damage off the attacked pokemon's hitPoints and saves it
+        $defender->hitPoints = $defender->hitPoints - $attackDamage;
+
+        $this->battleDisplay($attackNumber, $defender, $effect);
     }
 
-    public function battleDisplay($attack, $defender)
+    public function battleDisplay($attackNumber, $defender, $effect)
     {
         echo "<br>";
 
@@ -77,11 +64,13 @@ abstract class Pokemon
 //        echo "<img width=30% src=" . $this->picture[0]->location . " alt=" . "A picture of" . $this->name . ">";
 
         echo "<br>";
+        echo $effect->effect;
+        echo "<br>";
 
         //displays fight two on screen
-        echo $this->name . " attacks " . $defender->name . " with " . $attack . " and deals " . $result['damage'] . " damage.";
+        echo $this->name . " attacks " . $defender->name . " with " . $this->attacks[$attackNumber]->name . " and deals " . ($defender->health - $defender->hitPoints) . " damage.";
         echo "<br>";
-        echo $defender->name . " has " . $result['hitPoints'] . " hitPoints of the " . $defender->health . " left.";
+        echo $defender->name . " has " . $defender->hitPoints . " hitPoints of the " . $defender->health . " left.";
     }
 }
 
