@@ -23,18 +23,13 @@ include 'randomBattle.php';
 
 $pokeBag = [
     //making a new pokemon
-    $poke0 = new Pikachu(
-        'Willbert'
-    ),
-    $poke1 = new Charmeleon(
-        'Frankie'
-    ),
-    $poke2 = new Squirtle(
-        'WaterMan'
-    ),
-    $poke3 = new Mankey(
-        'MonkeyMan'
-    )
+    $poke0 = new Pikachu('Willbert'),
+    $poke1 = new Charmeleon('Frankie'),
+    $poke2 = new Squirtle('WaterMan'),
+    $poke3 = new Mankey('MonkeyMan'),
+    $poke4 = new Diglett('GrondAap'),
+    $poke4 = new Diglett('ZwartJoekel'),
+    $poke4 = new Snorlax('Kevin'),
 ];
 
 echo "<div class='col-md-offset-7'>";

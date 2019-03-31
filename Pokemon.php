@@ -31,15 +31,16 @@ abstract class Pokemon
     }
 
     //compares the pokemon and calculates the fight
-    public function attack($attackNumber, $defender) {
+    public function attack($attackNumber, $defender)
+    {
         //compares the type of the attacker with the resistance of the defender and makes a calculation
-        if ($this->type->type === $defender->weakness->type) {
+        if ($this->type === $defender->weakness->type) {
             $effect = "The attack was very effective!";
             echo "<br>";
             $attackDamage = $this->attacks[$attackNumber]->damage * $defender->weakness->multiplier;
 
             //compares the attacker type with the defender weakness and makes a calculation
-        } else if ($this->type->type === $defender->resistance->type) {
+        } else if ($this->type === $defender->resistance->type) {
             $effect = "The attack was very ineffective!";
             echo "<br>";
             $attackDamage = $this->attacks[$attackNumber]->damage - $defender->resistance->blockPoints;
@@ -54,15 +55,15 @@ abstract class Pokemon
         //takes the amount of damage off the attacked pokemon's hitPoints and saves it
         $defender->hitPoints = $defender->hitPoints - $attackDamage;
 
-        $this->battleDisplay($attackNumber, $defender, $effect);
+        $this->battleDisplay($attackDamage, $attackNumber, $defender, $effect);
     }
 
-    public function battleDisplay($attackNumber, $defender, $effect)
+    public function battleDisplay($attackDamage, $attackNumber, $defender, $effect)
     {
         //displays fight two on screen
         echo $effect;
         echo "<br>";
-        echo $this->name . " attacks " . $defender->name . " with " . $this->attacks[$attackNumber]->name . " and deals " . ($defender->health - $defender->hitPoints) . " damage.";
+        echo $this->name . " attacks " . $defender->name . " with " . $this->attacks[$attackNumber]->name . " and deals " . $attackDamage . " damage.";
         echo "<br>";
         echo $defender->name . " has " . $defender->hitPoints . " hitPoints of the " . $defender->health . " left.";
         echo "<br>";
@@ -90,7 +91,7 @@ class Pikachu extends Pokemon
         $this->name = $_name;
         $this->type = 'lightning';
         $this->health = '60';
-        $this->hitPoints = '60';
+        $this->hitPoints = $this->health;
         $this->resistance = new Resistance('fighting', 20);
         $this->weakness = new Weakness('fire', 1.5);
         $this->attacks =
@@ -113,7 +114,7 @@ class Charmeleon extends Pokemon
         $this->name = $_name;
         $this->type = 'fire';
         $this->health = '60';
-        $this->hitPoints = '60';
+        $this->hitPoints = $this->health;
         $this->resistance = new Resistance('lightning', 10);
         $this->weakness = new Weakness('water', 2);
         $this->attacks =
@@ -136,7 +137,7 @@ class Squirtle extends Pokemon
         $this->name = $_name;
         $this->type = 'water';
         $this->health = '60';
-        $this->hitPoints = '60';
+        $this->hitPoints = $this->health;
         $this->resistance = new Resistance('fire', 15);
         $this->weakness = new Weakness('lightning', 1.25);
         $this->attacks =
@@ -159,9 +160,9 @@ class Mankey extends Pokemon
         $this->name = $_name;
         $this->type = 'fighting';
         $this->health = '60';
-        $this->hitPoints = '60';
+        $this->hitPoints = $this->health;
         $this->resistance = new Resistance('water', 10);
-        $this->weakness = new Weakness('lightning', 50);
+        $this->weakness = new Weakness('lightning', 1.1);
         $this->attacks =
             [
                 new Attack('Sucker punch', 35),
@@ -171,6 +172,52 @@ class Mankey extends Pokemon
             [
                 new Picture('front', 'img/mankey.gif'),
                 new Picture('back', 'img/mankey-back.gif')
+            ];
+    }
+}
+
+class Diglett extends Pokemon
+{
+    public function __construct($_name)
+    {
+        $this->name = $_name;
+        $this->type = 'ground';
+        $this->health = '60';
+        $this->hitPoints = $this->health;
+        $this->resistance = new Resistance('water', 15);
+        $this->weakness = new Weakness('water', 1.8);
+        $this->attacks =
+            [
+                new Attack('Anal dig', 55),
+                new Attack('Ground move', 35)
+            ];
+        $this->picture =
+            [
+                new Picture('front', 'img/diglett.gif'),
+                new Picture('back', 'img/diglett-back.gif')
+            ];
+    }
+}
+
+class Snorlax extends Pokemon
+{
+    public function __construct($_name)
+    {
+        $this->name = $_name;
+        $this->type = 'normal';
+        $this->health = '120';
+        $this->hitPoints = $this->health;
+        $this->resistance = new Resistance('ground', 20);
+        $this->weakness = new Weakness('fighting', 2.5);
+        $this->attacks =
+            [
+                new Attack('Ground stomp', 15),
+                new Attack('Eat', 25)
+            ];
+        $this->picture =
+            [
+                new Picture('front', 'img/snorlax.gif'),
+                new Picture('back', 'img/snorlax-back.gif')
             ];
     }
 }
