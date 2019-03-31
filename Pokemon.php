@@ -19,9 +19,10 @@ abstract class Pokemon
 
     public function statDisplay()
     {
-        echo $this->__get('name') . "<br>";
-        echo "Type : " . $this->__get('type') . ". " . "<br>";
-        echo "Health : " . $this->__get('health') . "/" . $this->__get('hitPoints') . "." . "<br>";
+        echo "<br>";
+        echo $this->name . "<br>";
+        echo "Type : " . $this->type . ". " . "<br>";
+        echo "Health : " . $this->health . "." . "<br>";
         echo "Resistance : " . $this->__get('resistance')->type . ". " . "<br>";
         echo "Weakness : " . $this->__get('weakness')->type . ". " . "<br>";
         echo "Attack 1 : " . $this->__get('attacks')[0]->name . " " . $this->__get('attacks')[0]->damage . " dmg. " . "<br>";
@@ -58,19 +59,27 @@ abstract class Pokemon
 
     public function battleDisplay($attackNumber, $defender, $effect)
     {
-        echo "<br>";
-
-        //displays an image of the pokemon
-//        echo "<img width=30% src=" . $this->picture[0]->location . " alt=" . "A picture of" . $this->name . ">";
-
-        echo "<br>";
-        echo $effect->effect;
-        echo "<br>";
-
         //displays fight two on screen
+        echo $effect;
+        echo "<br>";
         echo $this->name . " attacks " . $defender->name . " with " . $this->attacks[$attackNumber]->name . " and deals " . ($defender->health - $defender->hitPoints) . " damage.";
         echo "<br>";
         echo $defender->name . " has " . $defender->hitPoints . " hitPoints of the " . $defender->health . " left.";
+        echo "<br>";
+    }
+
+    public function pokemonDisplay($pictureSide)
+    {
+        //displays an image of the pokemon
+        echo "<div class='d-inline-block float-top' style='width:30%;'>";
+        if ($pictureSide === 1) {
+            echo "<img class='mt-5' style='width:95%;' src=" . $this->picture[$pictureSide]->location . " alt=" . "A picture of " . $this->name . "'s '" . $this->picture[$pictureSide]->name . " side" . ">";
+        } else {
+            echo "<img class='mt-18' style='width:50%;' src=" . $this->picture[$pictureSide]->location . " alt=" . "A picture of " . $this->name . "'s '" . $this->picture[$pictureSide]->name . " side" . ">";
+        }
+        echo "<br>";
+        $this->statDisplay();
+        echo "</div>";
     }
 }
 
@@ -155,13 +164,13 @@ class Mankey extends Pokemon
         $this->weakness = new Weakness('lightning', 50);
         $this->attacks =
             [
-                new Attack('Water blast', 35),
-                new Attack('Punch', 20)
+                new Attack('Sucker punch', 35),
+                new Attack('Uppercut', 20)
             ];
         $this->picture =
             [
-                new Picture('Sucker punch', 'img/mankey.gif'),
-                new Picture('Uppercut', 'img/mankey-back.gif')
+                new Picture('front', 'img/mankey.gif'),
+                new Picture('back', 'img/mankey-back.gif')
             ];
     }
 }
