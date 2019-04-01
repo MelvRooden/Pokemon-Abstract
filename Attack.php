@@ -3,9 +3,13 @@
 //template for making an attack
 class Attack
 {
-    public $name; //the name of the attack
-    public $damage; //the amount of damage points
+    protected $name; //the name of the attack
+    protected $damage; //the amount of damage points
 
+    public function __get($request)
+    {
+        return $this->$request;
+    }
 
     public function __construct($_name, $_damage)
     {

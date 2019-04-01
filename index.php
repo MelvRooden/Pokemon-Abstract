@@ -1,6 +1,6 @@
 <?php
 include 'Pokemon.php';
-include 'Type.php';
+include 'Pokedex.php';
 include 'Resistance.php';
 include 'Weakness.php';
 include 'Attack.php';
@@ -27,6 +27,7 @@ $pokeBag = [
     $poke1 = new Charmeleon('Frankie'),
     $poke2 = new Squirtle('WaterMan'),
     $poke3 = new Mankey('MonkeyMan'),
+    $poke3 = new Mankey('ZandAap'),
     $poke4 = new Diglett('GrondAap'),
     $poke4 = new Diglett('ZwartJoekel'),
     $poke4 = new Snorlax('Kevin'),
