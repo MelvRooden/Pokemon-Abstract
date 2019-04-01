@@ -24,10 +24,10 @@ abstract class Pokemon
         echo $this->name . "<br>";
         echo "Type : " . $this->type . ". " . "<br>";
         echo "Health : " . $this->health . "." . "<br>";
-        echo "Resistance : " . $this->__get('resistance')->type . ". " . "<br>";
+        echo "Resistance : " . $this->resistance->type . ". " . "<br>";
         echo "Weakness : " . $this->weakness->type . ". " . "<br>";
-        echo "Attack 1 : " . $this->__get('attacks')[0]->name . " " . $this->__get('attacks')[0]->damage . " dmg. " . "<br>";
-        echo "Attack 2 : " . $this->__get('attacks')[1]->name . " " . $this->__get('attacks')[1]->damage . " dmg. " . "<br>";
+        echo "Attack 1 : " . $this->attacks[0]->name . " " . $this->__get('attacks')[0]->damage . " dmg. " . "<br>";
+        echo "Attack 2 : " . $this->attacks[1]->name . " " . $this->__get('attacks')[1]->damage . " dmg. " . "<br>";
         echo "</div>";
         echo "<br><br>";
     }
