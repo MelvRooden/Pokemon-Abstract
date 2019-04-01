@@ -3,8 +3,8 @@
 //template for making a weakness
 class Weakness
 {
-    protected $type; //the name of the weakness
-    protected $multiplier; //the weakness multiplier
+    private $type; //the name of the weakness
+    private $multiplier; //the weakness multiplier
 
     public function __get($request)
     {

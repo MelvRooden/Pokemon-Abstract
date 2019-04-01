@@ -3,8 +3,8 @@
 //template for making an attack
 class Attack
 {
-    protected $name; //the name of the attack
-    protected $damage; //the amount of damage points
+    private $name; //the name of the attack
+    private $damage; //the amount of damage points
 
     public function __get($request)
     {

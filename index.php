@@ -21,6 +21,7 @@ include 'randomBattle.php';
 
 <?php
 
+
 $pokeBag = [
     //making a new pokemon
     $poke0 = new Pikachu('Willbert'),

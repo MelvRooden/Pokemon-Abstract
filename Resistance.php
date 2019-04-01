@@ -3,8 +3,8 @@
 //template for making a resistance
 class Resistance
 {
-    protected $type; //the name of the resistance
-    protected $blockPoints; //the amount of blocked damage points
+    private $type; //the name of the resistance
+    private $blockPoints; //the amount of blocked damage points
 
     public function __get($request)
     {
